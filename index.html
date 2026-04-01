@@ -696,6 +696,91 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--red-glow);
         }
+        
+        /* 🔥 ULTIMATE MUSIC ANIMATION */
+@keyframes pulseWave {
+    0%,100% { transform:scaleX(1);opacity:0.7; }
+    50% { transform:scaleX(1.3);opacity:1; }
+}
+
+#mainPlayer:hover {
+    transform:scale(1.03) !important;
+    box-shadow:0 40px 100px rgba(239,35,60,0.7),0 0 80px rgba(0,255,136,0.6) !important;
+}
+
+.premium-track {
+    position:relative !important;
+    border:none !important;
+    overflow:visible !important;
+}
+
+.premium-track::before {
+    content:'';
+    position:absolute;
+    top:-2px;left:-2px;right:-2px;bottom:-2px;
+    background:linear-gradient(45deg,#00ff88,var(--primary-red),#00ff88);
+    border-radius:27px;
+    z-index:-1;
+    opacity:0;
+    transition:all 0.5s ease;
+    filter:blur(8px);
+}
+
+.premium-track:hover::before {
+    opacity:1;
+    animation:neonPulse 2s infinite;
+}
+
+@keyframes neonPulse {
+    0%,100% { opacity:0.6;transform:scale(1); }
+    50% { opacity:1;transform:scale(1.05); }
+}
+
+.track-glow {
+    position:relative;
+    transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.premium-track:hover .track-glow {
+    transform:translateY(-10px) scale(1.05);
+    text-shadow:0 0 30px currentColor;
+}
+
+.track-bar {
+    height:3px;
+    background:linear-gradient(90deg,transparent,var(--primary-red),transparent);
+    margin-top:1rem;
+    border-radius:2px;
+    opacity:0;
+    transition:opacity 0.3s;
+}
+
+.premium-track:hover .track-bar {
+    opacity:1;
+    animation:trackFill 2s infinite;
+}
+
+@keyframes trackFill {
+    0% { width:0%; }
+    50% { width:100%; }
+    100% { width:0%; }
+}
+
+.neon-tracks {
+    position:relative;
+}
+
+.neon-tracks::before {
+    content:'';
+    position:absolute;
+    top:-20px;left:50%;
+    transform:translateX(-50%);
+    width:100px;height:4px;
+    background:linear-gradient(90deg,#00ff88,var(--primary-red));
+    border-radius:2px;
+    box-shadow:0 0 20px #00ff88;
+}
+
     </style>
 </head>
 <body>
@@ -709,7 +794,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#hardskills">Hard Skills</a></li>
                 <li><a href="#softskills">Soft Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#hobbies">Hobbies</a></li>
@@ -918,42 +1003,123 @@
     </section>
 
     <!-- 7. Music Section -->
-    <section id="music">
-        <div class="glass-panel">
-            <h2>Let's Chill 🎧</h2>
-            <div class="divider"></div>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                My top five tracks for creative flow. Click to vibe with my current mood
-            </p>
+   <!-- 7. Music Section - SINGLE PLAYER PRO -->
+<section id="music">
+    <div class="glass-panel">
+        <h2>Let's Chill 🎧</h2>
+        <div class="divider"></div>
+        <p style="text-align:center;font-size:1.2rem;margin-bottom:2rem;">
+            Click to switch tracks
+        </p>
+        
+      <!-- SPECTACULAR WAVEFORM PLAYER -->
+        <div id="playerContainer" style="
+            background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(0,255,136,0.1),rgba(239,35,60,0.15));
+            backdrop-filter:blur(40px) saturate(200%);
+            border:2px solid rgba(255,255,255,0.25);
+            border-radius:30px;
+            padding:2.5rem 2rem;
+            margin:2.5rem 0;
+            text-align:center;
+            box-shadow:0 35px 80px rgba(0,0,0,0.6),
+                       0 0 60px rgba(0,255,136,0.3),
+                       inset 0 1px 0 rgba(255,255,255,0.3);
+            position:relative;
+            overflow:hidden;
+        ">
+            <!-- Animated waveform -->
+            <div id="waveform" style="
+                height:6px;background:linear-gradient(90deg,transparent,#00ff88,var(--primary-red),#00ff88,transparent);
+                border-radius:3px;margin:1.5rem auto;width:200px;
+                box-shadow:0 0 20px #00ff88;
+                animation:pulseWave 2s ease-in-out infinite;
+            "></div>
             
-            <div class="music-grid">
-                <div class="music-card" data-track="sword">
-                    <i class="fas fa-play music-play"></i>
-                    <h4>Sword</h4>
-                    <p><strong>Wisp</strong></p>
-                </div>
-                <div class="music-card" data-track="scars">
-                    <i class="fas fa-play music-play"></i>
-                    <h4>Scars</h4>
-                    <p><strong>Novulent</strong></p>
-                </div>
-                <div class="music-card" data-track="unlearning">
-                    <i class="fas fa-play music-play"></i>
-                    <h4>Unlearning You</h4>
-                    <p><strong>Crying City</strong></p>
-                </div>
-                <div class="music-card" data-track="tomorrow">
-                    <i class="fas fa-play music-play"></i>
-                    <h4>Tomorrow</h4>
-                    <p><strong>Distressor feat. Wisp</strong></p>
-                </div>
-                <div class="music-card" data-track="nyctophiliac">
-                    <i class="fas fa-play music-play"></i>
-                    <h4>Nyctophiliac</h4>
-                    <p><strong>Whatsaheart</strong></p>
-                </div>
-            </div>
+            <!-- Now Playing -->
+            <div id="nowPlaying" style="
+                font-size:1.3rem;
+                background:linear-gradient(135deg,#00ff88,var(--primary-red));
+                background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                margin-bottom:1.5rem;font-weight:700;letter-spacing:0.5px;
+                text-shadow:0 0 30px currentColor;
+            ">Choose your vibe</div>
             
+            <!-- PRO PLAYER -->
+            <audio id="mainPlayer" controls 
+                   style="
+                   width:100%;max-width:600px;margin:0 auto;display:block;
+                   background:linear-gradient(145deg,rgba(10,10,10,0.95),rgba(0,0,0,0.8));
+                   border-radius:25px;padding:2rem 1.5rem;
+                   border:2px solid rgba(255,255,255,0.15);
+                   backdrop-filter:blur(20px);
+                   box-shadow:0 30px 80px rgba(0,0,0,0.7),
+                              0 0 50px rgba(0,255,136,0.4),
+                              inset 0 1px 0 rgba(255,255,255,0.2);
+                   transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+                   ">
+            </audio>
+            
+            <!-- Progress glow -->
+            <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:#00ff88;border-radius:2px;box-shadow:0 0 20px #00ff88;opacity:0;transition:opacity 0.3s;"></div>
+        </div>
+        <!-- TRACK BUTTONS -->
+        <div class="music-grid">
+            <button class="music-card" onclick="switchTrack('wisp.mp3','Sword - Wisp')">
+                <i class="fas fa-play music-play"></i>
+                <h4>Sword</h4>
+                <p><strong>Wisp</strong></p>
+            </button>
+            
+            <button class="music-card" onclick="switchTrack('scars.mp3','Scars - Novulent')">
+                <i class="fas fa-play music-play"></i>
+                <h4>Scars</h4>
+                <p><strong>Novulent</strong></p>
+            </button>
+            
+            <button class="music-card" onclick="switchTrack('unlearningyou.mp3','Unlearning You - Crying City')">
+                <i class="fas fa-play music-play"></i>
+                <h4>Unlearning You</h4>
+                <p><strong>Crying City</strong></p>
+            </button>
+            
+            <button class="music-card" onclick="switchTrack('tomorrow.mp3','Tomorrow - Distressor')">
+                <i class="fas fa-play music-play"></i>
+                <h4>Tomorrow</h4>
+                <p><strong>Distressor feat. Wisp</strong></p>
+            </button>
+            
+            <button class="music-card" onclick="switchTrack('nyctophiliac.mp3','Nyctophiliac - Whatsaheart')">
+                <i class="fas fa-play music-play"></i>
+                <h4>Nyctophiliac</h4>
+                <p><strong>Whatsaheart</strong></p>
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+function switchTrack(file, title) {
+    const player = document.getElementById('mainPlayer');
+    player.src = file;
+    player.play();
+    
+    // Update player title
+    player.title = title;
+    
+    // Visual feedback button
+    event.target.closest('.music-card').style.boxShadow = '0 0 30px lime';
+    setTimeout(() => {
+        event.target.closest('.music-card').style.boxShadow = '';
+    }, 1000);
+    
+    console.log('🎵 Now playing:', title);
+}
+</script>
+            
+        </div>
+    </div>
+</section>
+
             <audio id="musicPlayer" preload="metadata"></audio>
         </div>
     </section>
@@ -969,7 +1135,7 @@
             
             <div class="contact-grid">
                 <a href="https://instagram.com/rurinbinar" class="contact-card" target="_blank" rel="noopener">
-                    <                    <i class="fab fa-instagram contact-icon"></i>
+                    <i class="fab fa-instagram contact-icon"></i>
                     <h3>Instagram</h3>
                     <p>@rurinbinar</p>
                     <span class="contact-link">Send Message</span>
@@ -1125,63 +1291,46 @@
                 `translateY(${scrolled}px) scale(1)`;
         });
 
-        // 🎵 ENHANCED MUSIC PLAYER - Fixed & Compact
-        const musicTracks = {
-            sword: 'wisp.mp3',
-            scars: 'scars.mp3',
-            unlearning: 'unlearningyou.mp3',
-            tomorrow: 'tomorrow.mp3',
-            nyctophiliac: 'nyctophiliac.mp3'
-        };
+    const musicTracks = {
+    wisp: 'wisp.mp3',
+    scars: 'scars.mp3',
+    unlearningyou: 'unlearningyou.mp3',
+    tomorrow: 'tomorrow.mp3',
+    nyctophiliac: 'nyctophiliac.mp3'
+};
 
-        function playMusic(track, card) {
+document.addEventListener('DOMContentLoaded', () => {
+    // Unlock audio context
+    document.body.addEventListener('click', function unlock() {
+        const audio = document.getElementById('musicPlayer');
+        audio.play().then(() => audio.pause()).catch(() => {});
+        document.body.removeEventListener('click', unlock);
+    }, { once: true });
+
+    // Card clicks
+    document.querySelectorAll('.music-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const track = card.dataset.track;
             const player = document.getElementById('musicPlayer');
             
-            // Visual feedback
-            card.style.transform = 'scale(0.97)';
-            card.style.boxShadow = '0 15px 40px rgba(239, 35, 60, 0.6)';
-            
+            // Set source & play
             player.src = musicTracks[track];
+            player.play();
             
-            const playPromise = player.play();
+            // Visual feedback
+            card.innerHTML = `
+                <i class="fas fa-volume-up" style="color: #00ff88; font-size: 4rem;"></i>
+                <h4>${card.querySelector('h4').textContent}</h4>
+                <p><strong>🔊 Playing!</strong></p>
+            `;
             
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log(`✅ Playing: ${track}`);
-                    card.innerHTML = `
-                        <i class="fas fa-volume-up music-play" style="color: #00ff88; font-size: 4rem;"></i>
-                        <h4>${track.charAt(0).toUpperCase() + track.slice(1)}</h4>
-                        <p><strong>Playing...</strong></p>
-                    `;
-                    card.style.transform = 'scale(1.02)';
-                }).catch(error => {
-                    console.log('❌ Play blocked:', error);
-                    card.style.transform = 'scale(1)';
-                    card.style.boxShadow = '';
-                    card.style.border = '3px solid #00ff88';
-                    setTimeout(() => {
-                        card.style.border = '';
-                    }, 1000);
-                });
-            }
-        }
 
-        // Music player initialization
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.music-card');
-            
-            cards.forEach((card) => {
-                const track = card.dataset.track;
-                card.title = `Play ${track}`;
-                
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    playMusic(track, this);
-                });
-            });
-            
-            console.log('🎵 Compact music player ready! 5 tracks loaded.');
+            console.log(`✅ Playing ${track}`);
         });
+    });
+});
 
     </script>
 </body>
