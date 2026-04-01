@@ -1140,68 +1140,75 @@
                 `translateY(${scrolled}px) scale(1)`;
         });
 
-        // Enhanced Music Player
-        const musicTracks = {
-            sword: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAo',
-            scars: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAo',
-            unlearning: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAo',
-            tomorrow: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAo',
-            nyctophiliac: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+Pwt
-                        // Note: Replace with actual audio URLs or embed Spotify/YouTube players
-        };
+        
 
-        function playMusic(track) {
-            const player = document.getElementById('musicPlayer');
-            player.src = musicTracks[track] || 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav';
-            
-            player.play().then(() => {
-                // Success - add playing animation
-                document.querySelectorAll('.music-card').forEach(card => {
-                    card.style.animation = 'none';
-                    card.offsetHeight; // Trigger reflow
-                    card.style.animation = 'pulse 1s infinite';
-                });
-            }).catch(e => {
-                console.log('Audio autoplay prevented:', e);
-                alert('Click play button to enable audio (browser policy)');
-            });
-        }
+const musicTracks = {
+    sword: 'wisp.mp3',
+    scars: 'scars.mp3',
+    unlearning: 'unlearningyou.mp3',
+    tomorrow: 'tomorrow.mp3',
+    nyctophiliac: 'nyctophiliac.mp3'
+};
 
-        // Add pulse animation for playing state
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0%, 100% { box-shadow: 0 0 40px rgba(239, 35, 60, 0.6); }
-                50% { box-shadow: 0 0 60px rgba(239, 35, 60, 0.9); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Performance optimizations
-        if ('IntersectionObserver' in window) {
-            // Already implemented above
-        }
-
-        // PWA-like loading
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
+// 🎵 ENHANCED MUSIC PLAYER - FIX AUTOPLAY + VISUAL FEEDBACK
+function playMusic(track, card) {
+    const player = document.getElementById('musicPlayer');
+    
+    // 🔄 Visual loading feedback
+    card.style.transform = 'scale(0.95)';
+    card.style.boxShadow = '0 20px 60px rgba(239, 35, 60, 0.6)';
+    
+    // 🎶 Load & Play
+    player.src = musicTracks[track];
+    
+    const playPromise = player.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            console.log(`✅ Playing: ${track}`);
+            // 🎉 SUCCESS - Playing state
+            card.innerHTML = `
+                <i class="fas fa-volume-up music-play" style="color: #00ff88; font-size: 5rem;"></i>
+                <h4>${track.charAt(0).toUpperCase() + track.slice(1)}</h4>
+                <p><strong>Playing...</strong></p>
+            `;
+            card.style.transform = 'scale(1.02)';
+        }).catch(error => {
+            console.log('❌ Play blocked:', error);
+            // Reset visual
+            card.style.transform = 'scale(1)';
+            card.style.boxShadow = '';
+            // 👆 User instruction
+            card.style.border = '3px solid #00ff88';
+            setTimeout(() => {
+                card.style.border = '';
+            }, 1000);
         });
+    }
+}
 
-        // Prevent zoom on iOS
-        document.addEventListener('touchstart', function(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.music-card');
+    const trackNames = Object.keys(musicTracks);
+    
+    cards.forEach((card, index) => {
+        const track = trackNames[index];
+        card.dataset.track = track;  // Simpan track name
+        
+        // 🎯 Event handler dengan user gesture
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            playMusic(track, this);
         });
+        
+        // Tooltip
+        card.title = `Play ${track}`;
+    });
+    
+    console.log('🎵 Music player ready! 5 tracks loaded.');
+});
 
-        let lastTime = 0;
-        document.addEventListener('wheel', (e) => {
-            const now = Date.now();
-            if (now - lastTime < 500) {
-                e.preventDefault();
-            }
-            lastTime = now;
-        }, { passive: false });
+
     </script>
 </body>
 </html>
