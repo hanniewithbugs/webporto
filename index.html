@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Porforin - Rurin Portfolio</title>
     
     <!-- Fonts -->
@@ -38,18 +38,21 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling iOS */
         }
 
         body {
-            font-family: 'Codec Pro', -apple-system, sans-serif;
+            font-family: 'Codec Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: radial-gradient(ellipse at top, var(--black-bg) 0%, var(--black-deep) 70%);
             color: var(--white-pure);
             overflow-x: hidden;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation; /* Better touch response */
         }
 
-        /* Particles Canvas */
+        /* Particles Canvas - Optimized for mobile */
         #particles-js {
             position: fixed;
             top: 0;
@@ -60,16 +63,16 @@
             pointer-events: none;
         }
 
-        /* Compact Navigation */
+        /* 🔥 MOBILE-OPTIMIZED NAVBAR */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             padding: 1rem 5%;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: saturate(180%) blur(30px);
-            border-bottom: 1px solid rgba(239, 35, 60, 0.2);
+            border-bottom: 1px solid rgba(239, 35, 60, 0.3);
             z-index: 1000;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -81,7 +84,7 @@
         }
 
         .nav-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -89,7 +92,7 @@
         }
 
         .logo {
-            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary-red), var(--red-glow), var(--white-pure));
             background-clip: text;
@@ -98,71 +101,77 @@
             letter-spacing: -0.025em;
         }
 
+        /* 🔥 MOBILE MENU */
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.8rem;
+            gap: clamp(1rem, 2vw, 2rem);
             align-items: center;
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            position: relative;
-            padding: 0.4rem 0;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             transition: all 0.3s ease;
             letter-spacing: 0.02em;
+            position: relative;
         }
 
         .nav-links a::before {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--primary-red), var(--red-glow));
-            transition: width 0.3s ease;
+            transition: all 0.3s ease;
             border-radius: 1px;
+            transform: translateX(-50%);
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--white-pure);
+            background: rgba(239, 35, 60, 0.15);
         }
 
-        .nav-links a:hover::before {
-            width: 100%;
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 80%;
         }
 
-        /* 🔥 MODIFIED: Sections - CENTERED VERTICALLY & HORIZONTALLY */
+        /* 🔥 SECTIONS - PERFECT MOBILE CENTERING */
         section {
-            min-height: 100vh; /* Full viewport height */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Vertical center */
-            align-items: center; /* Horizontal center */
-            padding: 100px 20px 80px;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(80px, 12vw, 120px) 5vw clamp(60px, 8vw, 80px);
             position: relative;
         }
 
-        /* Compact Glass Panels */
+        /* 🔥 PERFECT GLASS PANELS FOR ALL DEVICES */
         .glass-panel {
             background: 
-                linear-gradient(145deg, var(--glass-bg), rgba(255, 255, 255, 0.03)),
-                radial-gradient(circle at top left, rgba(239, 35, 60, 0.08), transparent 50%);
+                linear-gradient(145deg, var(--glass-bg), rgba(255, 255, 255, 0.04)),
+                radial-gradient(circle at top left, rgba(239, 35, 60, 0.1), transparent 60%);
             backdrop-filter: blur(35px) saturate(180%);
             border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 3rem 3rem;
-            max-width: 900px;
+            border-radius: clamp(20px, 4vw, 32px);
+            padding: clamp(2rem, 6vw, 4rem);
+            max-width: min(95vw, 1000px);
             width: 100%;
             position: relative;
             box-shadow: 
                 var(--shadow-soft),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                0 0 0 1px rgba(239, 35, 60, 0.15);
+                inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                0 0 0 1px rgba(239, 35, 60, 0.2);
             transform: translateZ(0);
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -170,126 +179,131 @@
         .glass-panel::before {
             content: '';
             position: absolute;
-            inset: -3px;
+            inset: -2px;
             background: linear-gradient(45deg, 
                 transparent 20%, 
                 var(--primary-red) 50%, 
                 var(--red-glow) 80%, 
                 transparent 100%);
-            border-radius: 33px;
+            border-radius: inherit;
             z-index: -1;
-            filter: blur(10px);
-            opacity: 0.25;
-            animation: shimmer 4s linear infinite;
+            filter: blur(12px);
+            opacity: 0.3;
+            animation: shimmer 5s linear infinite;
         }
 
         @keyframes shimmer {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(400%) translateY(400%) rotate(45deg); }
+            100% { transform: translateX(300%) translateY(300%) rotate(45deg); }
         }
 
         .glass-panel:hover {
-            transform: translateY(-15px) scale(1.01);
+            transform: translateY(-12px) scale(1.02);
             box-shadow: 
-                0 30px 60px rgba(0,0,0,0.7),
-                0 0 50px var(--red-glow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 25px 50px rgba(0,0,0,0.7),
+                0 0 40px var(--red-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
-        /* Compact Typography */
+        /* 🔥 RESPONSIVE TYPOGRAPHY */
         .hero-title {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(2.5rem, 10vw, 6rem);
             font-weight: 700;
             background: linear-gradient(135deg, 
                 var(--white-pure) 0%, 
-                var(--primary-red) 40%, 
-                var(--red-glow) 70%);
+                var(--primary-red) 50%, 
+                var(--red-glow) 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.05em;
+            margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+            letter-spacing: -0.04em;
+            line-height: 1.1;
             animation: heroPulse 3s ease-in-out infinite;
         }
 
         @keyframes heroPulse {
             0%, 100% { 
-                filter: drop-shadow(0 0 30px var(--red-glow));
+                filter: drop-shadow(0 0 25px var(--red-glow));
                 transform: scale(1);
             }
             50% { 
-                filter: drop-shadow(0 0 40px var(--red-glow));
-                transform: scale(1.01);
+                filter: drop-shadow(0 0 35px var(--red-glow));
+                transform: scale(1.015);
             }
         }
 
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 7vw, 4.5rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--white-pure), var(--primary-red));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1.5rem;
+            margin-bottom: clamp(1.5rem, 3vw, 2rem);
             text-align: center;
             letter-spacing: -0.03em;
+            line-height: 1.1;
         }
 
         h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
             font-weight: 600;
             background: linear-gradient(45deg, var(--primary-red), var(--red-glow));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
             letter-spacing: -0.02em;
         }
 
         h3 {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
             font-weight: 600;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.8rem;
             color: var(--white-pure);
+            justify-content: center;
         }
 
         h4 {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--primary-red);
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 2rem;
             line-height: 1.7;
+            text-align: center;
         }
 
-        /* Compact Button */
+        /* 🔥 PERFECT RESPONSIVE BUTTON */
         .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
-            padding: 1rem 2.5rem;
+            padding: clamp(0.9rem, 2.5vw, 1.2rem) clamp(2rem, 5vw, 3rem);
             background: linear-gradient(135deg, var(--primary-red), var(--red-glow));
             color: var(--white-pure);
             border: none;
-            border-radius: 40px;
-            font-size: 1rem;
+            border-radius: 50px;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(239, 35, 60, 0.4);
+            box-shadow: 0 12px 25px rgba(239, 35, 60, 0.4);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            touch-action: manipulation;
         }
 
         .btn-primary::before {
@@ -306,111 +320,127 @@
             transition: left 0.6s;
         }
 
+        .btn-primary:hover,
+        .btn-primary:active {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 18px 35px rgba(239, 35, 60, 0.6);
+        }
+
         .btn-primary:hover::before {
             left: 100%;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(239, 35, 60, 0.6);
-        }
-
-        /* Compact Divider */
+        /* 🔥 RESPONSIVE DIVIDER */
         .divider {
-            width: 80px;
+            width: clamp(60px, 12vw, 100px);
             height: 4px;
             background: linear-gradient(90deg, transparent, var(--primary-red), var(--red-glow), transparent);
-            margin: 2.5rem auto;
+            margin: clamp(2rem, 5vw, 3rem) auto;
             border-radius: 2px;
-            position: relative;
         }
 
-        /* Compact Grid */
+        /* 🔥 PERFECT RESPONSIVE GRIDS */
         .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr;
+            gap: clamp(2rem, 6vw, 3rem);
+            margin-top: clamp(2rem, 5vw, 3rem);
             align-items: center;
+            width: 100%;
         }
 
-        /* Compact Profile Image */
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3.5rem;
+            }
+        }
+
+        /* 🔥 MOBILE-OPTIMIZED PROFILE IMAGE */
         .profile-image {
             width: 100%;
-            height: 350px;
+            height: clamp(250px, 40vw, 400px);
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 
-                0 25px 50px rgba(0,0,0,0.6),
-                0 0 30px rgba(239, 35, 60, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+                0 20px 40px rgba(0,0,0,0.6),
+                0 0 25px rgba(239, 35, 60, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .profile-image:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.03) rotate(1deg);
             box-shadow: 
-                0 40px 80px rgba(0,0,0,0.8),
-                0 0 40px var(--red-glow);
+                0 35px 70px rgba(0,0,0,0.8),
+                0 0 35px var(--red-glow);
         }
 
-        /* Compact Skills */
+        /* 🔥 RESPONSIVE SKILLS */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25vw, 280px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: clamp(2rem, 5vw, 3rem);
+            justify-items: center;
         }
 
         .skills-icons {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.8rem;
+            gap: clamp(1.2rem, 3vw, 2rem);
             justify-content: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            width: 100%;
         }
 
         .skill-icon {
-            width: 65px;
-            height: 65px;
+            width: clamp(50px, 12vw, 70px);
+            height: clamp(50px, 12vw, 70px);
             padding: 0.8rem;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 6px 15px rgba(0,0,0,0.3));
         }
 
         .skill-icon:hover {
-            transform: translateY(-15px) scale(1.15) rotateY(360deg);
+            transform: translateY(-12px) scale(1.1) rotateY(180deg);
             background: linear-gradient(135deg, var(--primary-red), var(--red-glow));
-            box-shadow: 0 20px 40px rgba(239, 35, 60, 0.5);
-            filter: brightness(1.2) drop-shadow(0 0 30px var(--red-glow));
+            box-shadow: 0 18px 35px rgba(239, 35, 60, 0.5);
+            filter: brightness(1.2) drop-shadow(0 0 25px var(--red-glow));
         }
 
-        /* Compact Skill Cards */
+        /* 🔥 SKILL CARDS GRID */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 22vw, 250px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: clamp(2rem, 5vw, 3rem);
         }
 
         .skill-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 2rem 1.5rem;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -423,7 +453,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+                        height: 3px;
             background: linear-gradient(90deg, var(--primary-red), var(--red-glow));
             transform: scaleX(0);
             transition: transform 0.4s ease;
@@ -434,86 +464,90 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-15px);
-            background: rgba(239, 35, 60, 0.1);
-            box-shadow: 0 25px 50px rgba(239, 35, 60, 0.3);
+            transform: translateY(-12px);
+            background: rgba(239, 35, 60, 0.12);
+            box-shadow: 0 22px 45px rgba(239, 35, 60, 0.35);
         }
 
         .skill-icon-large {
-            font-size: 2.8rem;
+            font-size: clamp(2.2rem, 8vw, 3.2rem);
             color: var(--primary-red);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             display: block;
             transition: all 0.3s ease;
         }
 
-        /* Compact Timeline */
+        /* 🔥 TIMELINE - MOBILE PERFECT */
         .timeline-item {
             display: flex;
             align-items: flex-start;
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-            padding: 2rem 1.8rem;
-            background: rgba(255, 255, 255, 0.02);
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            padding: clamp(1.5rem, 4vw, 2.2rem);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
-            border-left: 5px solid var(--primary-red);
+            border-left: 4px solid var(--primary-red);
             position: relative;
             transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -2.5px;
-            top: 2rem;
-            width: 16px;
-            height: 16px;
+            left: -2px;
+            top: clamp(1.5rem, 3vw, 2rem);
+            width: 14px;
+            height: 14px;
             background: var(--primary-red);
             border-radius: 50%;
             border: 3px solid var(--black-bg);
-            box-shadow: 0 0 15px var(--red-glow);
+            box-shadow: 0 0 12px var(--red-glow);
         }
 
         .timeline-item:hover {
-            transform: translateX(15px);
-            background: rgba(239, 35, 60, 0.08);
-            box-shadow: 0 20px 40px rgba(239, 35, 60, 0.25);
+            transform: translateX(10px);
+            background: rgba(239, 35, 60, 0.1);
+            box-shadow: 0 18px 35px rgba(239, 35, 60, 0.3);
         }
 
         .timeline-icon {
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
             color: var(--primary-red);
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
             flex-shrink: 0;
-            width: 50px;
-            height: 50px;
-            background: rgba(239, 35, 60, 0.2);
+            width: clamp(45px, 12vw, 55px);
+            height: clamp(45px, 12vw, 55px);
+            background: rgba(239, 35, 60, 0.25);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Compact Music Cards */
+        /* 🔥 MUSIC GRID - MOBILE RESPONSIVE */
         .music-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(clamp(260px, 90vw, 320px), 1fr));
+            gap: clamp(1.8rem, 5vw, 3rem);
+            margin-top: clamp(2rem, 6vw, 3.5rem);
+            justify-items: center;
         }
 
         .music-card {
-            background: rgba(255, 255, 255, 0.04); 
-                        backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 25px;
-            padding: 2.5rem 2rem;
+            padding: clamp(2rem, 6vw, 3rem) clamp(1.8rem, 5vw, 2.5rem);
             text-align: center;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            max-width: 350px;
+            touch-action: manipulation;
         }
 
         .music-card::before {
@@ -524,15 +558,16 @@
             width: 200%;
             height: 200%;
             background: conic-gradient(from 0deg, 
-                rgba(239, 35, 60, 0.15), 
+                rgba(239, 35, 60, 0.2), 
                 transparent 50%, 
-                rgba(255, 255, 255, 0.1));
+                rgba(255, 255, 255, 0.15));
             opacity: 0;
             transition: all 0.6s ease;
             border-radius: 50%;
         }
 
-        .music-card:hover::before {
+        .music-card:hover::before,
+        .music-card:active::before {
             opacity: 1;
             animation: rotate 2s linear infinite;
         }
@@ -542,43 +577,53 @@
             100% { transform: rotate(360deg); }
         }
 
-        .music-card:hover {
-            transform: translateY(-20px) scale(1.03);
-            box-shadow: 0 35px 70px rgba(239, 35, 60, 0.4);
+        .music-card:hover,
+        .music-card:active {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(239, 35, 60, 0.45);
         }
 
         .music-play {
-            font-size: 4rem;
+            font-size: clamp(3rem, 10vw, 4.5rem);
             color: var(--primary-red);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             cursor: pointer;
             transition: all 0.4s ease;
             display: block;
         }
 
-        .music-card:hover .music-play {
+        .music-card:hover .music-play,
+        .music-card:active .music-play {
             color: var(--white-pure);
             transform: scale(1.1);
         }
 
-        /* Compact Contact Cards */
+        /* 🔥 CONTACT GRID */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr;
+            gap: clamp(2rem, 6vw, 3rem);
+            margin-top: clamp(2rem, 6vw, 3.5rem);
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
         }
 
         .contact-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 25px;
-            padding: 3rem 2.5rem;
+            padding: clamp(2.5rem, 7vw, 3.5rem) clamp(2rem, 6vw, 3rem);
             text-align: center;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
         }
 
         .contact-card::before {
@@ -591,31 +636,33 @@
             background: linear-gradient(90deg, var(--primary-red), var(--red-glow));
         }
 
-        .contact-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(239, 35, 60, 0.35);
+        .contact-card:hover,
+        .contact-card:active {
+            transform: translateY(-12px);
+            box-shadow: 0 28px 55px rgba(239, 35, 60, 0.4);
         }
 
         .contact-icon {
-            font-size: 4rem;
+            font-size: clamp(3rem, 10vw, 4.5rem);
             color: var(--primary-red);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             display: block;
             transition: all 0.4s ease;
         }
 
-        .contact-card:hover .contact-icon {
-            transform: scale(1.15);
+        .contact-card:hover .contact-icon,
+        .contact-card:active .contact-icon {
+            transform: scale(1.12);
             color: var(--white-pure);
         }
 
         .contact-link {
             color: var(--white-pure);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
             font-weight: 600;
             display: block;
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             letter-spacing: 0.03em;
             transition: all 0.3s ease;
         }
@@ -625,63 +672,141 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Design - More Compact */
-        @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                text-align: center;
+        /* 🔥 ULTIMATE MOBILE MUSIC PLAYER */
+        #playerContainer {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,255,136,0.12), rgba(239,35,60,0.18));
+            backdrop-filter: blur(45px) saturate(200%);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: clamp(20px, 6vw, 35px);
+            padding: clamp(2rem, 6vw, 3rem);
+            margin: clamp(2rem, 6vw, 3.5rem) 0;
+            text-align: center;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.7),
+                       0 0 55px rgba(0,255,136,0.35),
+                       inset 0 1px 0 rgba(255,255,255,0.35);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        #waveform {
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #00ff88, var(--primary-red), #00ff88, transparent);
+            border-radius: 3px;
+            margin: clamp(1.2rem, 3vw, 2rem) auto;
+            width: clamp(150px, 40vw, 250px);
+            box-shadow: 0 0 20px #00ff88;
+            animation: pulseWave 2s ease-in-out infinite;
+        }
+
+        #nowPlaying {
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            background: linear-gradient(135deg, #00ff88, var(--primary-red));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 25px currentColor;
+        }
+
+        #mainPlayer {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            display: block;
+            background: linear-gradient(145deg, rgba(10,10,10,0.98), rgba(0,0,0,0.85));
+            border-radius: 25px;
+            padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.2rem, 3vw, 2rem);
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.75),
+                       0 0 45px rgba(0,255,136,0.45),
+                       inset 0 1px 0 rgba(255,255,255,0.25);
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        #mainPlayer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 90px rgba(239,35,60,0.7), 0 0 70px rgba(0,255,136,0.65);
+        }
+
+        @keyframes pulseWave {
+            0%,100% { transform: scaleX(1); opacity: 0.7; }
+            50% { transform: scaleX(1.25); opacity: 1; }
+        }
+
+        /* 🔥 MOBILE RESPONSIVE - ULTRA PRECISION */
+        @media (max-width: 480px) {
+            section {
+                padding: 70px 4vw 50px;
+                min-height: 100vh;
             }
             
-            .nav-container {
-                max-width: 800px;
+            .glass-panel {
+                padding: clamp(1.8rem, 5vw, 2.5rem);
+                margin: 0.3rem;
+                border-radius: 20px;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .skills-icons {
+                gap: 1rem;
+                padding: 1.2rem;
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .music-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.2rem;
+            }
+            
+            .timeline-icon {
+                align-self: center;
             }
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                gap: 1.2rem;
+                gap: 1rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
             
             section {
-                padding: 90px 15px 60px;
-                min-height: 100vh; /* Maintain full height */
-            }
-            
-            .glass-panel {
-                padding: 2.5rem 2rem;
-                border-radius: 25px;
-                margin: 0.5rem;
-                max-width: 95%;
-            }
-            
-            .skills-icons {
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-            
-            .nav-links a {
-                font-size: 0.85rem;
+                padding: 85px 4vw 65px;
             }
         }
 
-        @media (max-width: 480px) {
-            .glass-panel {
-                padding: 2rem 1.5rem;
-            }
-            
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            .hero-title { font-size: 2.8rem; }
-            
-            .profile-image {
-                height: 280px;
+        @media (min-width: 1200px) {
+            .nav-container {
+                max-width: 1100px;
             }
         }
 
-        /* Compact Scrollbar */
+        /* 🔥 CUSTOM SCROLLBAR - MOBILE FRIENDLY */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -690,116 +815,42 @@
 
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(var(--primary-red), var(--red-glow));
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--red-glow);
         }
-        
-        /* 🔥 ULTIMATE MUSIC ANIMATION */
-@keyframes pulseWave {
-    0%,100% { transform:scaleX(1);opacity:0.7; }
-    50% { transform:scaleX(1.3);opacity:1; }
-}
 
-#mainPlayer:hover {
-    transform:scale(1.03) !important;
-    box-shadow:0 40px 100px rgba(239,35,60,0.7),0 0 80px rgba(0,255,136,0.6) !important;
-}
-
-.premium-track {
-    position:relative !important;
-    border:none !important;
-    overflow:visible !important;
-}
-
-.premium-track::before {
-    content:'';
-    position:absolute;
-    top:-2px;left:-2px;right:-2px;bottom:-2px;
-    background:linear-gradient(45deg,#00ff88,var(--primary-red),#00ff88);
-    border-radius:27px;
-    z-index:-1;
-    opacity:0;
-    transition:all 0.5s ease;
-    filter:blur(8px);
-}
-
-.premium-track:hover::before {
-    opacity:1;
-    animation:neonPulse 2s infinite;
-}
-
-@keyframes neonPulse {
-    0%,100% { opacity:0.6;transform:scale(1); }
-    50% { opacity:1;transform:scale(1.05); }
-}
-
-.track-glow {
-    position:relative;
-    transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-}
-
-.premium-track:hover .track-glow {
-    transform:translateY(-10px) scale(1.05);
-    text-shadow:0 0 30px currentColor;
-}
-
-.track-bar {
-    height:3px;
-    background:linear-gradient(90deg,transparent,var(--primary-red),transparent);
-    margin-top:1rem;
-    border-radius:2px;
-    opacity:0;
-    transition:opacity 0.3s;
-}
-
-.premium-track:hover .track-bar {
-    opacity:1;
-    animation:trackFill 2s infinite;
-}
-
-@keyframes trackFill {
-    0% { width:0%; }
-    50% { width:100%; }
-    100% { width:0%; }
-}
-
-.neon-tracks {
-    position:relative;
-}
-
-.neon-tracks::before {
-    content:'';
-    position:absolute;
-    top:-20px;left:50%;
-    transform:translateX(-50%);
-    width:100px;height:4px;
-    background:linear-gradient(90deg,#00ff88,var(--primary-red));
-    border-radius:2px;
-    box-shadow:0 0 20px #00ff88;
-}
-
+        /* 🔥 MOBILE SAFARI FIXES */
+        @supports (-webkit-touch-callout: none) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .glass-panel {
+                -webkit-backdrop-filter: blur(35px) saturate(180%);
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Premium Particle Background -->
+    <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Navigation -->
+    <!-- 🔥 MOBILE-OPTIMIZED NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">My Porto</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#hardskills">Hard Skills</a></li>
-                <li><a href="#softskills">Soft Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#hobbies">Hobbies</a></li>
-                <li><a href="#music">Music</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Hard Skills</a></li>
+                <li><a href="#softskills" class="nav-link">Soft Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#hobbies" class="nav-link">Hobbies</a></li>
+                <li><a href="#music" class="nav-link">Music</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -808,8 +859,8 @@
     <section id="home">
         <div class="glass-panel">
             <h1 class="hero-title">Hola! This is My Portfolio</h1>
-            <p style="font-size: 1.2rem; text-align: center; max-width: 600px; margin: 0 auto 3rem;">
-                Welcome to <strong>My Page</strong> 
+            <p style="font-size: clamp(1.1rem, 3vw, 1.3rem); max-width: 650px; margin: 0 auto 2.5rem;">
+                Welcome to <strong>My Page</strong>
             </p>
             <div style="text-align: center;">
                 <a href="#about" class="btn-primary">
@@ -832,7 +883,7 @@
                     Passionate about crafting pixel-perfect digital experiences that blend 
                     artistry with cutting-edge technology.</p>
                 </div>
-                <div>
+                <div style="display: flex; justify-content: center;">
                     <img src="profile.jpeg" 
                          alt="Rurin - Creative Professional" class="profile-image">
                 </div>
@@ -855,10 +906,10 @@
                 <i class="fas fa-file-image skill-icon" style="font-size: 2.5rem; color: #00b894;" title="CorelDRAW"></i>
                 <i class="fab fa-blender skill-icon" style="font-size: 2.5rem; color: #f7931e;" title="Blender"></i>
                 <i class="fas fa-file-excel skill-icon" style="font-size: 2.5rem; color: #107c41;" title="Microsoft Excel"></i>
-                <i class="fas fa-code skill-icon" style="font-size: 2.5rem; color: #00d4aa;" title="VS Code"></i>
+                <i class="fas fa-code skill-icon" style="font-size: 2.5rem; color: #00d4aa;" title="VS  Code"></i>
             </div>
 
-            <h3 style="margin-top: 4rem;"><i class="fas fa-terminal"></i> Programming Languages</h3>
+            <h3 style="margin-top: clamp(3rem, 8vw, 4rem);"><i class="fas fa-terminal"></i> Programming Languages</h3>
             <div class="skills-icons">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="skill-icon" title="Python">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="skill-icon" title="C++">
@@ -919,7 +970,7 @@
         </div>
     </section>
 
-    <!-- 5. Experience - Fixed HTML -->
+    <!-- 5. Experience -->
     <section id="experience">
         <div class="glass-panel">
             <h2>Professional Experience</h2>
@@ -1002,125 +1053,54 @@
         </div>
     </section>
 
-    <!-- 7. Music Section -->
-   <!-- 7. Music Section - SINGLE PLAYER PRO -->
-<section id="music">
-    <div class="glass-panel">
-        <h2>Let's Chill 🎧</h2>
-        <div class="divider"></div>
-        <p style="text-align:center;font-size:1.2rem;margin-bottom:2rem;">
-            Listen to my top five songs to get closer to my vibe
-        </p>
-        
-      <!-- SPECTACULAR WAVEFORM PLAYER -->
-        <div id="playerContainer" style="
-            background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(0,255,136,0.1),rgba(239,35,60,0.15));
-            backdrop-filter:blur(40px) saturate(200%);
-            border:2px solid rgba(255,255,255,0.25);
-            border-radius:30px;
-            padding:2.5rem 2rem;
-            margin:2.5rem 0;
-            text-align:center;
-            box-shadow:0 35px 80px rgba(0,0,0,0.6),
-                       0 0 60px rgba(0,255,136,0.3),
-                       inset 0 1px 0 rgba(255,255,255,0.3);
-            position:relative;
-            overflow:hidden;
-        ">
-            <!-- Animated waveform -->
-            <div id="waveform" style="
-                height:6px;background:linear-gradient(90deg,transparent,#00ff88,var(--primary-red),#00ff88,transparent);
-                border-radius:3px;margin:1.5rem auto;width:200px;
-                box-shadow:0 0 20px #00ff88;
-                animation:pulseWave 2s ease-in-out infinite;
-            "></div>
+    <!-- 7. 🔥 ULTIMATE MOBILE MUSIC SECTION -->
+    <section id="music">
+        <div class="glass-panel">
+            <h2>Let's Chill 🎧</h2>
+            <div class="divider"></div>
+            <p style="text-align:center; font-size: clamp(1.1rem, 3vw, 1.3rem); margin-bottom: 2.5rem;">
+                Listen to my top five songs to get closer to my vibe
+            </p>
             
-            <!-- Now Playing -->
-            <div id="nowPlaying" style="
-                font-size:1.3rem;
-                background:linear-gradient(135deg,#00ff88,var(--primary-red));
-                background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-                margin-bottom:1.5rem;font-weight:700;letter-spacing:0.5px;
-                text-shadow:0 0 30px currentColor;
-            ">Choose your vibe</div>
+            <!-- SPECTACULAR RESPONSIVE PLAYER -->
+            <div id="playerContainer">
+                <div id="waveform"></div>
+                <div id="nowPlaying">Choose your vibe</div>
+                <audio id="mainPlayer" controls preload="metadata"></audio>
+            </div>
             
-            <!-- PRO PLAYER -->
-            <audio id="mainPlayer" controls 
-                   style="
-                   width:100%;max-width:600px;margin:0 auto;display:block;
-                   background:linear-gradient(145deg,rgba(10,10,10,0.95),rgba(0,0,0,0.8));
-                   border-radius:25px;padding:2rem 1.5rem;
-                   border:2px solid rgba(255,255,255,0.15);
-                   backdrop-filter:blur(20px);
-                   box-shadow:0 30px 80px rgba(0,0,0,0.7),
-                              0 0 50px rgba(0,255,136,0.4),
-                              inset 0 1px 0 rgba(255,255,255,0.2);
-                   transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-                   ">
-            </audio>
-            
-            <!-- Progress glow -->
-            <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:#00ff88;border-radius:2px;box-shadow:0 0 20px #00ff88;opacity:0;transition:opacity 0.3s;"></div>
-        </div>
-        <!-- TRACK BUTTONS -->
-        <div class="music-grid">
-            <button class="music-card" onclick="switchTrack('wisp.mp3','Sword - Wisp')">
-                <i class="fas fa-play music-play"></i>
-                <h4>Sword</h4>
-                <p><strong>Wisp</strong></p>
-            </button>
-            
-            <button class="music-card" onclick="switchTrack('scars.mp3','Scars - Novulent')">
-                <i class="fas fa-play music-play"></i>
-                <h4>Scars</h4>
-                <p><strong>Novulent</strong></p>
-            </button>
-            
-            <button class="music-card" onclick="switchTrack('unlearningyou.mp3','Unlearning You - Crying City')">
-                <i class="fas fa-play music-play"></i>
-                <h4>Unlearning You</h4>
-                <p><strong>Crying City</strong></p>
-            </button>
-            
-            <button class="music-card" onclick="switchTrack('tomorrow.mp3','Tomorrow - Distressor')">
-                <i class="fas fa-play music-play"></i>
-                <h4>Tomorrow</h4>
-                <p><strong>Distressor feat. Wisp</strong></p>
-            </button>
-            
-            <button class="music-card" onclick="switchTrack('nyctophiliac.mp3','Nyctophiliac - Whatsaheart')">
-                <i class="fas fa-play music-play"></i>
-                <h4>Nyctophiliac</h4>
-                <p><strong>Whatsaheart</strong></p>
-            </button>
-        </div>
-    </div>
-</section>
-
-<script>
-function switchTrack(file, title) {
-    const player = document.getElementById('mainPlayer');
-    player.src = file;
-    player.play();
-    
-    // Update player title
-    player.title = title;
-    
-    // Visual feedback button
-    event.target.closest('.music-card').style.boxShadow = '0 0 30px lime';
-    setTimeout(() => {
-        event.target.closest('.music-card').style.boxShadow = '';
-    }, 1000);
-    
-    console.log('🎵 Now playing:', title);
-}
-</script>
-            
-        </div>
-    </div>
-</section>
-
-            <audio id="musicPlayer" preload="metadata"></audio>
+            <!-- RESPONSIVE TRACK BUTTONS -->
+            <div class="music-grid">
+                <button class="music-card premium-track" onclick="switchTrack('wisp.mp3','Sword - Wisp')">
+                    <i class="fas fa-play music-play"></i>
+                    <h4>Sword</h4>
+                    <p><strong>Wisp</strong></p>
+                </button>
+                
+                <button class="music-card premium-track" onclick="switchTrack('scars.mp3','Scars - Novulent')">
+                    <i class="fas fa-play music-play"></i>
+                    <h4>Scars</h4>
+                    <p><strong>Novulent</strong></p>
+                </button>
+                
+                <button class="music-card premium-track" onclick="switchTrack('unlearningyou.mp3','Unlearning You - Crying City')">
+                    <i class="fas fa-play music-play"></i>
+                    <h4>Unlearning You</h4>
+                    <p><strong>Crying City</strong></p>
+                </button>
+                
+                <button class="music-card premium-track" onclick="switchTrack('tomorrow.mp3','Tomorrow - Distressor')">
+                    <i class="fas fa-play music-play"></i>
+                    <h4>Tomorrow</h4>
+                    <p><strong>Distressor feat. Wisp</strong></p>
+                </button>
+                
+                <button class="music-card premium-track" onclick="switchTrack('nyctophiliac.mp3','Nyctophiliac - Whatsaheart')">
+                    <i class="fas fa-play music-play"></i>
+                    <h4>Nyctophiliac</h4>
+                    <p><strong>Whatsaheart</strong></p>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1129,12 +1109,12 @@ function switchTrack(file, title) {
         <div class="glass-panel">
             <h2>Let's Connect</h2>
             <div class="divider"></div>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">
+            <p style="text-align: center; font-size: clamp(1.1rem, 3vw, 1.3rem); margin-bottom: 3rem;">
                 Ready to collaborate? Reach out via DM or Email for exciting projects
             </p>
             
             <div class="contact-grid">
-                <a href="https://instagram.com/rurinbinar" class="contact-card" target="_blank" rel="noopener">
+                <a href="https://instagram.com/rurinbinar" class="contact-card" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-instagram contact-icon"></i>
                     <h3>Instagram</h3>
                     <p>@rurinbinar</p>
@@ -1151,8 +1131,9 @@ function switchTrack(file, title) {
         </div>
     </section>
 
+    <!-- 🔥 ULTIMATE RESPONSIVE JAVASCRIPT -->
     <script>
-        // Premium Smooth Scrolling
+        // Premium Smooth Scrolling + Mobile Optimized
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1161,53 +1142,57 @@ function switchTrack(file, title) {
                 if (targetSection) {
                     targetSection.scrollIntoView({ 
                         behavior: 'smooth', 
-                        block: 'start' 
+                        block: 'start'
                     });
+                    // Mobile: Close nav if open
+                    document.getElementById('navLinks').style.display = 'flex';
                 }
             });
         });
 
-        // Compact Particles
+        // 🔥 Particles - Mobile Optimized
         particlesJS("particles-js", {
             particles: {
-                number: { value: 50, density: { enable: true, value_area: 800 } },
+                number: { 
+                    value: window.innerWidth > 768 ? 60 : 30, 
+                    density: { enable: true, value_area: 800 } 
+                },
                 color: { value: ["#ef233c", "#ff496c", "#ffffff", "#ffe5e5"] },
                 shape: {
-                    type: ["circle", "triangle", "polygon"],
+                    type: ["circle", "triangle"],
                     stroke: { width: 0, color: "#000" }
                 },
                 opacity: { 
-                    value: 0.5, 
+                    value: 0.4, 
                     random: true, 
                     anim: { enable: true, speed: 1, opacity_min: 0.1 } 
                 },
                 size: { 
-                    value: 4, 
+                    value: window.innerWidth > 768 ? 4 : 3,
                     random: true, 
                     anim: { enable: true, speed: 2, size_min: 0.8 } 
                 },
                 line_linked: {
-                    enable: true,
-                    distance: 120,
+                    enable: window.innerWidth > 768,
+                    distance: window.innerWidth > 768 ? 120 : 80,
                     color: "#ef233c",
-                    opacity: 0.25,
+                    opacity: 0.2,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 1.5,
+                    speed: window.innerWidth > 768 ? 1.5 : 1,
                     direction: "none",
                     random: true,
                     straight: false,
                     out_mode: "bounce",
-                    bounce: true,
-                    attract: { enable: false }
+                    bounce: true
                 }
             },
             interactivity: {
                 detect_on: "canvas",
                 events: {
-                    onhover: { enable: true, mode: "bubble" },
+                    onhover: { enable: window.innerWidth > 768, mode: "bubble" },
                     onclick: { enable: true, mode: "repulse" },
                     resize: true
                 },
@@ -1219,42 +1204,42 @@ function switchTrack(file, title) {
                         opacity: 0.8, 
                         speed: 2 
                     },
-                    repulse: { distance: 150, duration: 0.4 }
+                    repulse: { distance: 120, duration: 0.4 }
                 }
             },
             retina_detect: true
         });
 
-        // Compact 3D Parallax
+        // 🔥 Mobile-First Parallax (Reduced on mobile)
         let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = (e.clientY / window.innerHeight) * 2 - 1;
-        });
-
-        function updateParallax() {
-            const panels = document.querySelectorAll('.glass-panel');
-            panels.forEach((panel, index) => {
-                const depth = 1 + (index * 0.2);
-                const rotateX = mouseY * 8 * depth;
-                const rotateY = -mouseX * 8 * depth;
-                const translateY = -15 * depth;
-                
-                panel.style.transform = `
-                    translateY(${translateY}px) 
-                    rotateX(${rotateX}deg) 
-                    rotateY(${rotateY}deg) 
-                    scale(1.01)
-                `;
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = (e.clientY / window.innerHeight) * 2 - 1;
             });
-            requestAnimationFrame(updateParallax);
-        }
-        updateParallax();
 
-        // Scroll-triggered Animations - Updated for centered layout
+            function updateParallax() {
+                const panels = document.querySelectorAll('.glass-panel');
+                panels.forEach((panel, index) => {
+                    const depth = 1 + (index * 0.15);
+                    const rotateX = mouseY * 6 * depth;
+                    const rotateY = -mouseX * 6 * depth;
+                    panel.style.transform = `
+                        translateY(-10px) 
+                        rotateX(${rotateX}deg) 
+                        rotateY(${rotateY}deg) 
+                        scale(1.005)
+                    `;
+                });
+                requestAnimationFrame(updateParallax);
+            }
+            updateParallax();
+        }
+
+        // 🔥 Scroll Animations - Mobile Optimized
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px' /* Adjusted for centered layout */
+            threshold: 0.1,
+            rootMargin: window.innerWidth > 768 ? '0px 0px -100px 0px' : '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1263,75 +1248,114 @@ function switchTrack(file, title) {
                     setTimeout(() => {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0) scale(1)';
-                    }, index * 80);
+                    }, index * 100);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.glass-panel').forEach((panel, index) => {
             panel.style.opacity = '0';
-            panel.style.transform = 'translateY(60px) scale(0.97)';
-            panel.style.transition = `all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.08}s`;
+            panel.style.transform = 'translateY(50px) scale(0.98)';
+            panel.style.transition = `all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s`;
             observer.observe(panel);
         });
 
-        // Navbar Scroll Effect
+        // 🔥 Navbar Effects
         let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 80) {
+            if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-            
-            // Parallax header effect - Adjusted for centered layout
-            const scrolled = window.scrollY / 4;
-            document.querySelector('#home .glass-panel')?.style.transform = 
-                `translateY(${scrolled}px) scale(1)`;
         });
 
-    const musicTracks = {
-    wisp: 'wisp.mp3',
-    scars: 'scars.mp3',
-    unlearningyou: 'unlearningyou.mp3',
-    tomorrow: 'tomorrow.mp3',
-    nyctophiliac: 'nyctophiliac.mp3'
-};
+        // 🔥 Active Nav Link
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Unlock audio context
-    document.body.addEventListener('click', function unlock() {
-        const audio = document.getElementById('musicPlayer');
-        audio.play().then(() => audio.pause()).catch(() => {});
-        document.body.removeEventListener('click', unlock);
-    }, { once: true });
-
-    // Card clicks
-    document.querySelectorAll('.music-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            e.preventDefault();
+        // 🔥 ULTIMATE MUSIC PLAYER - Mobile Optimized
+        function switchTrack(file, title) {
+            const player = document.getElementById('mainPlayer');
+            const nowPlaying = document.getElementById('nowPlaying');
+            const button = event.target.closest('.music-card');
             
-            const track = card.dataset.track;
-            const player = document.getElementById('musicPlayer');
+            // Update source and play
+            player.src = file;
+            player.play().catch(e => console.log('Audio play failed:', e));
             
-            // Set source & play
-            player.src = musicTracks[track];
-            player.play();
+            // Update UI
+            nowPlaying.textContent = title;
+            nowPlaying.style.animation = 'none';
+            setTimeout(() => nowPlaying.style.animation = 'pulseWave 2s infinite', 10);
             
             // Visual feedback
-            card.innerHTML = `
-                <i class="fas fa-volume-up" style="color: #00ff88; font-size: 4rem;"></i>
-                <h4>${card.querySelector('h4').textContent}</h4>
-                <p><strong>🔊 Playing!</strong></p>
-            `;
+            button.style.transform = 'scale(0.95)';
+            button.style.boxShadow = '0 0 40px #00ff88';
+            setTimeout(() => {
+                button.style.transform = '';
+                button.style.boxShadow = '';
+            }, 200);
             
+            console.log('🎵 Now playing:', title);
+        }
 
-            console.log(`✅ Playing ${track}`);
+        // 🔥 Mobile Audio Unlock
+        document.addEventListener('DOMContentLoaded', () => {
+            let unlocked = false;
+            document.body.addEventListener('touchstart', function unlock() {
+                if (!unlocked) {
+                    const audio = document.createElement('audio');
+                    audio.play().then(() => {
+                        audio.pause();
+                        unlocked = true;
+                    }).catch(() => {});
+                    document.body.removeEventListener('touchstart', unlock);
+                }
+            }, { once: true });
+
+            document.body.addEventListener('click', function unlock() {
+                if (!unlocked) {
+                    const audio = document.createElement('audio');
+                    audio.play().then(() => {
+                        audio.pause();
+                        unlocked = true;
+                    }).catch(() => {});
+                    document.body.removeEventListener('click', unlock);
+                }
+            }, { once: true });
         });
-    });
-});
 
+        // 🔥 Prevent Zoom on iOS
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', function (e) {
+            if (e.scale !== 1) { e.preventDefault(); }
+        }, { passive: false });
+
+        // 🔥 PWA Ready - Add to home screen
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
     </script>
 </body>
 </html>
